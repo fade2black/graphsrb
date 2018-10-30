@@ -19,25 +19,25 @@ module Graphsrb
     ##
     #Compares two vertices. Two vertices are equal if their +id+s are equal
     def ==(nghb)
-      @id == nghb.id
+      id == nghb.id
     end
 
     ##
     #Returns the degree of the vertex
     def degree
-      @neighbours.size
+      neighbours.size
     end
 
     ##
     #Adds a new adjacent vertex to the adjaceny list
     def add_neighbour(nghb)
-      @neighbours << nghb.clone
+      neighbours << nghb.clone
     end
 
     ##
     #Given vertex +id+ removes the vertex from the adjaceny list with this +id+
     def remove_neighbour(id)
-      @neighbours.delete(Vertex.new(id:id))
+      neighbours.delete(Vertex.new(id:id))
     end
 
     ##
