@@ -11,4 +11,12 @@ class Graphsrb::Edge
     (vertex1.id == edge.vertex1.id) && (vertex2.id == edge.vertex2.id) ||
     (vertex1.id == edge.vertex2.id) && (vertex2.id == edge.vertex1.id)
   end
+
+  def to_s
+    "(#{vertex1.id}, #{weight}, #{vertex2.id})"
+  end
+
+  def to_json
+    {vertex1: vertex1.id, vertex2: vertex2.id, weight: weight}.to_json
+  end
 end

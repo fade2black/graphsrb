@@ -2,11 +2,13 @@ PATH
   remote: .
   specs:
     graphsrb (0.1.0)
+      json
 
 GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.3)
+    json (2.1.0)
     rake (10.5.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
