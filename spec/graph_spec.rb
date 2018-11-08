@@ -1,3 +1,5 @@
+require "graphsrb/graph"
+require "graphsrb/edge"
 
 RSpec.describe Graphsrb::Graph do
   it "raises exception" do
