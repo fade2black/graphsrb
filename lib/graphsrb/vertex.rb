@@ -5,7 +5,7 @@ class Graphsrb::Vertex
 
   #Creates a vertex given its +id+, a nonnegative integer.
   def initialize(id)
-    raise VertexInitializationError, 'Vertex id may not be nil' if id.nil?
+    raise Graphsrb::VertexInitializationError, 'Vertex id may not be nil' if id.nil?
     @id = id
   end
 

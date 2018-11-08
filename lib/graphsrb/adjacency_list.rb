@@ -52,7 +52,7 @@ class Graphsrb::AdjacencyList
 
   #Creates and returns the newly created node
   def self.create_node(vertex_id, args={})
-    Node.new(vertex_id, args)
+    Graphsrb::Node.new(vertex_id, args)
   end
 
   private

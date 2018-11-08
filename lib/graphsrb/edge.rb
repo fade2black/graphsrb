@@ -2,8 +2,8 @@
 class Graphsrb::Edge
   attr_reader :vertex1, :vertex2, :weight
   def initialize(id1, id2, args={})
-    @vertex1 = Vertex.new(id1)
-    @vertex2 = Vertex.new(id2)
+    @vertex1 = Graphsrb::Vertex.new(id1)
+    @vertex2 = Graphsrb::Vertex.new(id2)
     @weight = args[:weight] || 1
   end
 

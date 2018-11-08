@@ -10,7 +10,7 @@ class Graphsrb::Graph
   #   graph = Graphsrb::Graph.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
 
   def initialize(args={})
-    raise VertexInitializationError, 'Missing vertices' if args[:vertices].nil?
+    raise Graphsrb::VertexInitializationError, 'Missing vertices' if args[:vertices].nil?
 
     @adj_table = {}
     args[:vertices].each{|vertex_id| adj_table[vertex_id] = _create_adjacency_list }
@@ -123,15 +123,15 @@ class Graphsrb::Graph
 
   private
   def _create_node(vertex_id, args={})
-    Node.new(vertex_id, args)
+    Graphsrb::Node.new(vertex_id, args)
   end
 
   def _create_adjacency_list
-    AdjacencyList.new
+    Graphsrb::AdjacencyList.new
   end
 
   def _create_edge(id1, id2, args={})
-    Edge.new(id1, id2, args)
+    Graphsrb::Edge.new(id1, id2, args)
   end
 
 end
