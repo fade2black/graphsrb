@@ -59,6 +59,7 @@ class Graphsrb::Graph
 
   #Adds a new vertex
   def add_vertex(id)
+    return nil if has_vertex?(id)
     adj_table[id] = _create_adjacency_list
     true
   end

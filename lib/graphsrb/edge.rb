@@ -13,7 +13,7 @@ class Graphsrb::Edge
   end
 
   def to_s
-    "(#{vertex1.id}, #{weight}, #{vertex2.id})"
+    "(#{vertex1.id}, #{vertex2.id}, #{weight})"
   end
 
   def to_json
