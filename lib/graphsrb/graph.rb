@@ -26,6 +26,7 @@ class Graphsrb::Graph
   #Removes all vertices and edges.
   def clear
     adj_table.each_value{|list| list.clear}
+    true
   end
 
   ##Creates a copy of the graph
@@ -59,31 +60,35 @@ class Graphsrb::Graph
   #Adds a new vertex
   def add_vertex(id)
     adj_table[id] = _create_adjacency_list
+    true
   end
 
   #Adds a new edge
   def add_edge(id1, id2, args={})
-    return if has_edge?(id1, id2)
+    return nil if has_edge?(id1, id2)
     add_vertex(id1) unless has_vertex?(id1)
     add_vertex(id2) unless has_vertex?(id2)
     adj_table[id1] << _create_node(id2, args)
+    true
   end
 
   #Remove an edge from the graph
   def remove_edge(id1, id2)
     adj_table[id1].delete(_create_node(id2)) if has_vertex?(id1)
     adj_table[id2].delete(_create_node(id1)) if has_vertex?(id2)
+    true
   end
 
   #Remove a vertex from the graph
   def remove_vertex(id)
-    return unless has_vertex?(id)
+    return nil unless has_vertex?(id)
 
     adj_table[id].clear
     adj_table.delete(id)
 
     node = _create_node(id)
     adj_table.each_value{|list| list.delete(node)}
+    return id
   end
 
   #Retrieves an edge
