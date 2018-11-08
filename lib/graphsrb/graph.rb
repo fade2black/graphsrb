@@ -10,11 +10,9 @@ class Graphsrb::Graph
   #   graph = Graphsrb::Graph.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
 
   def initialize(args={})
-    raise Graphsrb::VertexInitializationError, 'Missing vertices' if args[:vertices].nil?
-
     @adj_table = {}
-    args[:vertices].each{|vertex_id| adj_table[vertex_id] = _create_adjacency_list }
-    args[:edges].each do |e|
+    args.fetch(:vertices,[]).each{|vertex_id| adj_table[vertex_id] = _create_adjacency_list }
+    args.fetch(:edges,[]).each do |e|
       unless has_edge?(e[0], e[1])
         add_edge(e[0], e[1], weight: e[2] || 1)
       end

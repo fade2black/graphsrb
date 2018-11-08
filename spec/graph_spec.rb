@@ -2,9 +2,6 @@ require "graphsrb/graph"
 require "graphsrb/edge"
 
 RSpec.describe Graphsrb::Graph do
-  it "raises exception" do
-    expect{described_class.new}.to raise_error Graphsrb::VertexInitializationError
-  end
 
   it "creates a graph" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
