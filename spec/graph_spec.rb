@@ -2,6 +2,11 @@ require "graphsrb/graph"
 require "graphsrb/edge"
 
 RSpec.describe Graphsrb::Graph do
+  it "creates en empty graph" do
+    graph = described_class.new
+    expect(graph.vertex_count).to be 0
+    expect(graph.edge_count).to be 0
+  end
 
   it "creates a graph" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
