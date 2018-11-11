@@ -26,7 +26,7 @@ class Graphsrb::Graph
   #Removes all vertices and edges.
   def clear
     adj_table.each_value{|list| list.clear}
-    adj_table = []
+    @adj_table = {}
     true
   end
 
