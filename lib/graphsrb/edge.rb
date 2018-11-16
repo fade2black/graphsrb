@@ -4,7 +4,7 @@ class Graphsrb::Edge
   def initialize(id1, id2, args={})
     @vertex1 = Graphsrb::Vertex.new(id1)
     @vertex2 = Graphsrb::Vertex.new(id2)
-    @weight = args[:weight] || 1
+    @weight = args.fetch(:weight, 1)
   end
 
   def ==(edge)

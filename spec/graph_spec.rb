@@ -30,8 +30,25 @@ RSpec.describe Graphsrb::Graph do
     vertices = graph.vertices
 
     expect(vertices.size).to be 5
-    expect(([1,2,3,5,6] - vertices).empty?).to be true
-    expect((vertices - [1,2,3,5,6]).empty?).to be true
+    [1,2,3,5,6].each { |id| expect(vertices.include?(Graphsrb::Vertex.new(id))).to be true }
+
+  end
+
+  it "returns edges" do
+    edges_array = [[1,2,1], [2,3,1], [2,5,1], [6,1,1]]
+    graph = described_class.new(vertices: [1,2,3], edges:edges_array)
+    edges = graph.edges
+    expect(edges.count).to be 4
+    edges_array.each do |e|
+      expect(edges.include?(Graphsrb::Edge.new(e[0],e[1]))).to be true
+    end
+
+    graph.clear
+    edges = graph.edges
+    expect(graph.edges.count).to be 0
+    edges_array.each do |e|
+      expect(edges.include?(Graphsrb::Edge.new(e[0],e[1]))).to be false
+    end
   end
 
   it "adds a new vertex" do

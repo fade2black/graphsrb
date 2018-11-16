@@ -21,8 +21,24 @@ class Graphsrb::Graph
 
   #Returns vertices of the graph
   def vertices
-    adj_table.keys
+    vertex_array = []
+    adj_table.keys.each do |id|
+      vertex_array << _create_vertex(id)
+    end
+    vertex_array
   end
+
+  #Returns edges
+  def edges
+    edges_array = []
+    vertices.each do |vertex|
+      adj_table[vertex.id].each do |node|
+        edges_array << _create_edge(vertex.id, node.vertex.id, weight: node.weight)
+      end
+    end
+    edges_array
+  end
+
   #Removes all vertices and edges.
   def clear
     adj_table.each_value{|list| list.clear}
@@ -112,10 +128,10 @@ class Graphsrb::Graph
   def incident_edges(id)
     nodes = []
     nodes = adj_table[id].nodes unless adj_table[id].nil?
-    vertices.each do |v|
-      next if v == id
-      node = adj_table[v].find(_create_node(id))
-      nodes << _create_node(v, weight:node.weight) unless node.nil?
+    vertices.each do |vertex|
+      next if vertex.id == id
+      node = adj_table[vertex.id].find(_create_node(id))
+      nodes << _create_node(vertex.id, weight:node.weight) unless node.nil?
     end
     #Convert node into edges with weights
     nodes.map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
@@ -137,6 +153,10 @@ class Graphsrb::Graph
 
   def _create_edge(id1, id2, args={})
     Graphsrb::Edge.new(id1, id2, args)
+  end
+
+  def _create_vertex(id)
+    Graphsrb::Vertex.new(id)
   end
 
 end

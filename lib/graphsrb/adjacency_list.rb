@@ -1,5 +1,7 @@
 
 class Graphsrb::AdjacencyList
+  include Enumerable
+
   def initialize
     @adj_list = []
   end
@@ -12,6 +14,10 @@ class Graphsrb::AdjacencyList
   #Adds a node to the adjacency list
   def <<(node)
     add(node)
+  end
+
+  def each(&block)
+    @adj_list.each(&block)
   end
 
   #Returns the number of nodes in the adjacency list
