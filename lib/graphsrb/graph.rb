@@ -67,6 +67,7 @@ class Graphsrb::Graph
   def has_vertex?(id)
     not adj_table[id].nil?
   end
+
   alias vertex? has_vertex?
 
   #Checks whether the graph has an edge (v_1, v_2).
@@ -74,6 +75,7 @@ class Graphsrb::Graph
     has_vertex?(id1) && adj_table[id1].has_node?(_create_node(id2)) ||
     has_vertex?(id2) && adj_table[id2].has_node?(_create_node(id1))
   end
+
   alias edge? has_edge?
 
   #Adds a new vertex
@@ -125,8 +127,7 @@ class Graphsrb::Graph
   end
 
 
-  #Retrieves all incident edges of a vertex
-  #Returns an array of tripples *[vertex_1, vertex_2, weight]*
+  #Retrieves incident edges of a vertex
   def incident_edges(id)
     nodes = []
     nodes = adj_table[id].nodes unless adj_table[id].nil?
@@ -135,9 +136,24 @@ class Graphsrb::Graph
       node = adj_table[vertex.id].find(_create_node(id))
       nodes << _create_node(vertex.id, weight:node.weight) unless node.nil?
     end
-    #Convert node into edges with weights
+    #Convert nodes into edges with weights
     nodes.map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
   end
+
+  #Retrieves adjacent vertices of a vertex
+  def adjacent_vertices(id)
+    nodes = []
+    nodes = adj_table[id].nodes unless adj_table[id].nil?
+    vertices.each do |vertex|
+      next if vertex.id == id
+      node = adj_table[vertex.id].find(_create_node(id))
+      nodes << _create_node(vertex.id, weight:node.weight) unless node.nil?
+    end
+    #Convert nodes into vertices
+    nodes.map{|node| _create_vertex(node.vertex.id)}
+  end
+
+  alias neighborhood adjacent_vertices
 
 
   protected
