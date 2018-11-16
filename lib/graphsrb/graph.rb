@@ -67,12 +67,14 @@ class Graphsrb::Graph
   def has_vertex?(id)
     not adj_table[id].nil?
   end
+  alias vertex? has_vertex?
 
   #Checks whether the graph has an edge (v_1, v_2).
   def has_edge?(id1, id2)
     has_vertex?(id1) && adj_table[id1].has_node?(_create_node(id2)) ||
     has_vertex?(id2) && adj_table[id2].has_node?(_create_node(id1))
   end
+  alias edge? has_edge?
 
   #Adds a new vertex
   def add_vertex(id)

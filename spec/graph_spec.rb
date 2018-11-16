@@ -25,13 +25,24 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.edge_count).to be 2
   end
 
+  it "creates alias for 'vertex?' " do
+    graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
+    expect(graph.vertex?(1)).to be true
+    expect(graph.vertex?(4)).to be false
+  end
+
+  it "creates alias for 'edge?' " do
+    graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
+    expect(graph.edge?(1,2)).to be true
+    expect(graph.edge?(1,4)).to be false
+  end
+
+
   it "returns vertices" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,5,1], [6,1,1]])
     vertices = graph.vertices
-
     expect(vertices.size).to be 5
     [1,2,3,5,6].each { |id| expect(vertices.include?(Graphsrb::Vertex.new(id))).to be true }
-
   end
 
   it "returns edges" do
