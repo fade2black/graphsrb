@@ -2,10 +2,17 @@
 class Graphsrb::Edge
   attr_reader :vertex1, :vertex2, :weight
   def initialize(id1, id2, args={})
+    if id1 == id2
+      raise Graphsrb::EdgeInitializationError, "Vertex id's must be different from each other"
+    end
+
     @vertex1 = Graphsrb::Vertex.new(id1)
     @vertex2 = Graphsrb::Vertex.new(id2)
     @weight = args.fetch(:weight, 1)
   end
+
+  alias initial_vertex vertex1
+  alias terminal_vertex vertex2
 
   def ==(edge)
     (vertex1.id == edge.vertex1.id) && (vertex2.id == edge.vertex2.id) ||
@@ -19,4 +26,5 @@ class Graphsrb::Edge
   def to_json
     {vertex1: vertex1.id, vertex2: vertex2.id, weight: weight}.to_json
   end
+
 end

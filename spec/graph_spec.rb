@@ -8,6 +8,10 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.edge_count).to be 0
   end
 
+  it "checks if edge vertices are different (disallows loops)" do
+    expect{described_class.new(edges:[[1,2,1], [2,2,1]])}.to raise_error(Graphsrb::EdgeInitializationError)
+  end
+
   it "creates a graph" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
     expect(graph.vertex_count).to be 3
@@ -37,6 +41,15 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.edge?(1,4)).to be false
   end
 
+  it "returns degree of a vertex" do
+    graph = described_class.new(vertices: [9], edges:[[2,1], [2,3], [2,5], [5,3]])
+    expect(graph.degree(3)).to eq(2)
+    expect(graph.degree(1)).to eq(1)
+    expect(graph.degree(2)).to eq(3)
+    expect(graph.degree(5)).to eq(2)
+    expect(graph.degree(9)).to eq(0)
+    expect(graph.degree(6)).to eq(0)
+  end
 
   it "returns vertices" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,5,1], [6,1,1]])
@@ -91,6 +104,8 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.edge_count).to be 4
     expect(graph.has_edge?(4,6)).to be true
     expect(graph.has_edge?(6,4)).to be true
+
+    expect{graph.add_edge(7,7)}.to raise_error(Graphsrb::EdgeInitializationError)
   end
 
   it "does not add a new edge if it already exists" do
