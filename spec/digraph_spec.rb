@@ -1,5 +1,5 @@
 require "graphsrb/digraph"
-require "graphsrb/edge"
+require "graphsrb/diedge"
 
 RSpec.describe Graphsrb::Digraph do
   it "creates an empty digraph" do
@@ -187,15 +187,15 @@ RSpec.describe Graphsrb::Digraph do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [1,3,1], [3,5,1], [1,6,4]])
     edges = graph.outgoing_edges(1)
     expect(edges.size).to eq(3)
-    [Graphsrb::Edge.new(1,2), Graphsrb::Edge.new(1,3),
-      Graphsrb::Edge.new(1,6)].each do |edge|
+    [Graphsrb::DiEdge.new(1,2), Graphsrb::DiEdge.new(1,3),
+      Graphsrb::DiEdge.new(1,6)].each do |edge|
         expect(edges.include?(edge)).to be true
       end
 
     edges = graph.outgoing_edges(2)
     expect(edges.size).to be 1
-    expect(edges.include?(Graphsrb::Edge.new(2,3))).to be true
-    expect(edges.include?(Graphsrb::Edge.new(3,1))).to be false
+    expect(edges.include?(Graphsrb::DiEdge.new(2,3))).to be true
+    expect(edges.include?(Graphsrb::DiEdge.new(3,1))).to be false
 
     edges = graph.outgoing_edges(6)
     expect(edges.size).to be 0
@@ -208,13 +208,13 @@ RSpec.describe Graphsrb::Digraph do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [1,3,1], [3,5,1], [1,6,4]])
     edges = graph.incoming_edges(3)
     expect(edges.size).to eq(2)
-    [Graphsrb::Edge.new(2,3), Graphsrb::Edge.new(1,3)].each do |edge|
+    [Graphsrb::DiEdge.new(2,3), Graphsrb::DiEdge.new(1,3)].each do |edge|
       expect(edges.include?(edge)).to be true
     end
 
     edges = graph.incoming_edges(6)
     expect(edges.size).to eq(1)
-    expect(edges.include?(Graphsrb::Edge.new(1,6))).to be true
+    expect(edges.include?(Graphsrb::DiEdge.new(1,6))).to be true
 
     edges = graph.incoming_edges(1)
     expect(edges.size).to eq(0)

@@ -13,6 +13,7 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
     end
   end
 
+
   #Remove an edge from the graph
   def remove_edge(id1, id2)
     adj_table[id1].delete(_create_node(id2)) if has_vertex?(id1)
@@ -22,34 +23,34 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
   #Retrieves outgoing edges of a vertex
   def outgoing_edges(id)
     #Convert nodes into edges
-    _outgoing_edges(id).map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
+    _outgoing_nodes(id).map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
   end
 
   #Retrieves incoming edges of a vertex
   def incoming_edges(id)
     #Convert nodes into edges
-    _incoming_edges(id).map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
+    _incoming_nodes(id).map{|node| _create_edge(node.vertex.id, id, weight:node.weight)}
   end
 
   #Returns +out-degree+ of a vertex
   def outdegree(id)
-    _outgoing_edges(id).size
+    _outgoing_nodes(id).size
   end
 
   #Returns +in-degree+ of a vertex
   def indegree(id)
-    _incoming_edges(id).size
+    _incoming_nodes(id).size
   end
 
   private
 
-  def _outgoing_edges(id)
+  def _outgoing_nodes(id)
     nodes = []
     nodes = adj_table[id].nodes unless adj_table[id].nil?
     nodes
   end
 
-  def _incoming_edges(id)
+  def _incoming_nodes(id)
     nodes = []
     vertices.each do |vertex|
       next if vertex.id == id
@@ -57,5 +58,10 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
       nodes << _create_node(vertex.id, weight:node.weight) unless node.nil?
     end
     nodes
+  end
+
+  protected
+  def _create_edge(id1, id2, args={})
+    Graphsrb::DiEdge.new(id1, id2, args)
   end
 end
