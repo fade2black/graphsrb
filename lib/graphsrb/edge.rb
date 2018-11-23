@@ -14,9 +14,13 @@ class Graphsrb::Edge
   alias initial_vertex vertex1
   alias terminal_vertex vertex2
 
-  def ==(edge)
-    (vertex1.id == edge.vertex1.id) && (vertex2.id == edge.vertex2.id) ||
-    (vertex1.id == edge.vertex2.id) && (vertex2.id == edge.vertex1.id)
+  def ==(other)
+    (vertex1.id == other.vertex1.id) && (vertex2.id == other.vertex2.id) ||
+    (vertex1.id == other.vertex2.id) && (vertex2.id == other.vertex1.id)
+  end
+
+  def eql?(other)
+    self == other
   end
 
   def to_s
