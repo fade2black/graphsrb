@@ -6,7 +6,7 @@ class Graphsrb::Node
   #Creates a new node
   def initialize(vertex_id, args={})
     @vertex = Graphsrb::Vertex.new(vertex_id)
-    @weight = args[:weight]
+    @weight = args.fetch(:weight, 1)
   end
 
   #Compares two nodes. Two nodes are equal if their +vertices+ are equal.
