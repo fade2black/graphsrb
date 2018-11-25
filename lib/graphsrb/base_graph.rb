@@ -123,8 +123,9 @@ class Graphsrb::BaseGraph
 
 
   #Retrieves adjacent vertices of a vertex
-  def adjacent_vertices(id)
+  def adjacent_vertices(vertex)
     nodes = []
+    id = vertex.id
     nodes = adj_table[id].nodes unless adj_table[id].nil?
     vertices.each do |vertex|
       next if vertex.id == id

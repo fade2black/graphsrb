@@ -1,5 +1,6 @@
 require "graphsrb/graph"
 require "graphsrb/edge"
+require "graphsrb/vertex"
 
 RSpec.describe Graphsrb::Graph do
   it "creates en empty graph" do
@@ -248,31 +249,31 @@ RSpec.describe Graphsrb::Graph do
   it "retrieves adjacent vertices" do
     graph = described_class.new(vertices: [1,2,3,4,8], edges:[[1,2,-1], [2,3,1], [2,5,1], [6,1,0.4]])
 
-    vertices = graph.neighborhood(1)
+    vertices = graph.neighborhood(Graphsrb::Vertex.new(1))
     expect(vertices.size).to be 2
     expect(vertices.include? Graphsrb::Vertex.new(1)).to be false
     expect(vertices.include? Graphsrb::Vertex.new(2)).to be true
     expect(vertices.include? Graphsrb::Vertex.new(6)).to be true
 
     graph.remove_edge(1,6)
-    vertices = graph.neighborhood(1)
+    vertices = graph.neighborhood(Graphsrb::Vertex.new(1))
     expect(vertices.size).to be 1
     expect(vertices.include? Graphsrb::Vertex.new(2)).to be true
     expect(vertices.include? Graphsrb::Vertex.new(6)).to be false
 
-    vertices = graph.neighborhood(8)
+    vertices = graph.neighborhood(Graphsrb::Vertex.new(8))
     expect(vertices.size).to be 0
 
-    expect(graph.adjacent_vertices(9).size).to be 0
+    expect(graph.adjacent_vertices(Graphsrb::Vertex.new(9)).size).to be 0
 
     graph.add_edge(3,2)
     graph.add_edge(2,6)
     graph.add_edge(2,11)
-    vertices = graph.adjacent_vertices(2)
+    vertices = graph.adjacent_vertices(Graphsrb::Vertex.new(2))
     expect(vertices.size).to be 5
 
     graph.clear
-    vertices = graph.neighborhood(1)
+    vertices = graph.neighborhood(Graphsrb::Vertex.new(1))
     expect(vertices.size).to be 0
   end
 
