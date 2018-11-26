@@ -1,5 +1,17 @@
 #Directed graph
 class Graphsrb::Digraph < Graphsrb::BaseGraph
+
+  #Retrieves adjacent vertices of a vertex
+  def adjacent_vertices(vertex)
+    nodes = []
+    id = vertex.id
+    nodes = adj_table[id].nodes unless adj_table[id].nil?
+    #Convert nodes into vertices
+    nodes.map{|node| _create_vertex(node.vertex.id)}
+  end
+
+  alias neighborhood adjacent_vertices
+
   #Checks whether the digraph has an edge
   def has_edge?(id1, id2)
     has_vertex?(id1) && adj_table[id1].has_node?(_create_node(id2))
