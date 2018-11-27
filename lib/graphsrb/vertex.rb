@@ -13,4 +13,16 @@ class Graphsrb::Vertex
   def ==(vertex)
     id == vertex.id
   end
+
+  def eql?(other)
+    self == other
+  end
+
+  def to_s
+    self.id.to_s
+  end
+
+  def hash
+    self.id
+  end
 end

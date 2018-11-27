@@ -30,9 +30,7 @@ module DFS
     vertices = @graph.adjacent_vertices(v)
     vertices.each do |u|
       if @dfi[u.id] == 0
-        edge = @graph.edge(v.id, u.id)
-        puts "[#{v.id},#{u.id}], #{edge}"
-        @forest << edge
+        @forest << @graph.edge(v.id, u.id)
         dfs(u)
       end
     end
@@ -48,11 +46,6 @@ def run_example(example_title, graph)
   puts "Forest:"
   forest.each{|edge| puts edge}
   #Compute back edges
-
-  puts forest
-  puts "*********************"
-  puts graph.edges
-
   bedges = graph.edges - forest
   puts "Back edges:"
   bedges.each{|edge| puts edge}
@@ -68,7 +61,7 @@ def main
     [10,11],[10,12],[10,13],
     [11,12]
   ]
-  #run_example('Example 1 (undirected graph)', Graph.new(edges:edges))
+  run_example('Example 1 (undirected graph)', Graph.new(edges:edges))
 
   diedges = [
     [1,3],[1,5],
