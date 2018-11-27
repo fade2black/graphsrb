@@ -14,6 +14,10 @@ class Graphsrb::Vertex
     id == vertex.id
   end
 
+  def !=(vertex)
+    id != vertex.id
+  end
+
   def eql?(other)
     self == other
   end
