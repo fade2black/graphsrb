@@ -17,9 +17,9 @@ class Graphsrb::Graph < Graphsrb::BaseGraph
   alias neighborhood adjacent_vertices
 
   #Retrieves incident edges of a vertex
-  def incident_edges(id)
+  def incident_edges(v)
     #Convert nodes into edges with weights
-    _incident_nodes(id).map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
+    _incident_nodes(v.id).map{|node| _create_edge(v.id, node.vertex.id, weight:node.weight)}
   end
 
   #Returns +degree+ of a vertex
