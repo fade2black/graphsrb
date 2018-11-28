@@ -114,7 +114,7 @@ RSpec.describe Graphsrb::Digraph do
     expect(graph.vertex_count).to be 5
     expect(graph.edge_count).to be 5
 
-    graph.remove_vertex(1)
+    graph.remove_vertex(Graphsrb::Vertex.new(1))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 3
     expect(graph.has_edge?(1,2)).to be false
@@ -129,7 +129,7 @@ RSpec.describe Graphsrb::Digraph do
     expect(graph.has_edge?(6,1)).to be false
     expect(graph.has_edge?(1,3)).to be false
 
-    graph.remove_vertex(1)
+    graph.remove_vertex(Graphsrb::Vertex.new(1))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 3
 
@@ -148,8 +148,8 @@ RSpec.describe Graphsrb::Digraph do
     expect(graph.has_edge?(1,6)).to be true
     expect(graph.has_edge?(6,1)).to be true
 
-    graph.remove_vertex(1)
-    graph.remove_vertex(6)
+    graph.remove_vertex(Graphsrb::Vertex.new(1))
+    graph.remove_vertex(Graphsrb::Vertex.new(6))
     expect(graph.vertex_count).to be 3
     expect(graph.edge_count).to be 2
     expect(graph.has_edge?(1,2)).to be false
@@ -159,7 +159,7 @@ RSpec.describe Graphsrb::Digraph do
     expect(graph.has_edge?(2,5)).to be true
     expect(graph.has_edge?(2,3)).to be true
 
-    graph.remove_vertex(2)
+    graph.remove_vertex(Graphsrb::Vertex.new(2))
     expect(graph.vertex_count).to be 2
     expect(graph.edge_count).to be 0
 

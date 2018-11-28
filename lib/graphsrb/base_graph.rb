@@ -90,14 +90,16 @@ class Graphsrb::BaseGraph
   end
 
   #Remove an edge from the graph
-  def remove_edge(id1, id2)
+  def remove_edge(v1, v2)
+    id1, id2 = v1.id, v2.id
     adj_table[id1].delete(_create_node(id2)) if has_vertex?(id1)
     adj_table[id2].delete(_create_node(id1)) if has_vertex?(id2)
     true
   end
 
   #Remove a vertex from the graph
-  def remove_vertex(id)
+  def remove_vertex(v)
+    id = v.id
     return nil unless has_vertex?(id)
 
     adj_table[id].clear
@@ -105,7 +107,7 @@ class Graphsrb::BaseGraph
 
     node = _create_node(id)
     adj_table.each_value{|list| list.delete(node)}
-    return id
+    return v
   end
 
   #Retrieves an edge

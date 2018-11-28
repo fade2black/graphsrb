@@ -1,11 +1,11 @@
 require 'graphsrb'
 include Graphsrb
 
-#Assumption: graph is connected undirected and all vertices have even degree
+#Assumption: graph is nonempty connected undirected and all vertices have even degree
 module EulerTour
   def self.run(graph)
     init(graph)
-    dfs(v)
+    dfs(graph.vertices.first)
   end
 
   def self.init(g)

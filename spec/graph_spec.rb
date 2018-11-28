@@ -130,21 +130,21 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.has_edge?(1,2)).to be true
     expect(graph.has_edge?(5,2)).to be true
 
-    graph.remove_edge(1,2)
+    graph.remove_edge(Graphsrb::Vertex.new(1), Graphsrb::Vertex.new(2))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 2
     expect(graph.has_edge?(1,2)).to be false
 
-    graph.remove_edge(5,2)
+    graph.remove_edge(Graphsrb::Vertex.new(5), Graphsrb::Vertex.new(2))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 1
     expect(graph.has_edge?(5,2)).to be false
 
-    graph.remove_edge(2,5)
+    graph.remove_edge(Graphsrb::Vertex.new(2), Graphsrb::Vertex.new(5))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 1
 
-    graph.remove_edge(3,2)
+    graph.remove_edge(Graphsrb::Vertex.new(3), Graphsrb::Vertex.new(2))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 0
     expect(graph.has_edge?(3,2)).to be false
@@ -155,7 +155,7 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.vertex_count).to be 5
     expect(graph.edge_count).to be 4
 
-    graph.remove_vertex(1)
+    graph.remove_vertex(Graphsrb::Vertex.new(1))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 2
     expect(graph.has_edge?(1,2)).to be false
@@ -170,13 +170,13 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.has_edge?(1,6)).to be false
     expect(graph.has_edge?(1,3)).to be false
 
-    graph.remove_vertex(1)
+    graph.remove_vertex(Graphsrb::Vertex.new(1))
     expect(graph.vertex_count).to be 4
     expect(graph.edge_count).to be 2
 
     graph.add_vertex(1)
     graph.add_edge(1,6)
-    expect(graph.vertex_count).to be 5
+    expect(graph.vertex_count).to eq(5)
     expect(graph.edge_count).to be 3
     expect(graph.has_edge?(1,2)).to be false
     expect(graph.has_edge?(1,6)).to be true
@@ -186,15 +186,15 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.vertex_count).to be 5
     expect(graph.edge_count).to be 3
 
-    graph.remove_vertex(1)
-    graph.remove_vertex(6)
+    graph.remove_vertex(Graphsrb::Vertex.new(1))
+    graph.remove_vertex(Graphsrb::Vertex.new(6))
     expect(graph.vertex_count).to be 3
     expect(graph.edge_count).to be 2
     expect(graph.has_edge?(1,2)).to be false
     expect(graph.has_edge?(1,6)).to be false
     expect(graph.has_edge?(1,3)).to be false
 
-    graph.remove_vertex(2)
+    graph.remove_vertex(Graphsrb::Vertex.new(2))
     expect(graph.vertex_count).to be 2
     expect(graph.edge_count).to be 0
 
@@ -255,7 +255,7 @@ RSpec.describe Graphsrb::Graph do
     expect(vertices.include? Graphsrb::Vertex.new(2)).to be true
     expect(vertices.include? Graphsrb::Vertex.new(6)).to be true
 
-    graph.remove_edge(1,6)
+    graph.remove_edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(6))
     vertices = graph.neighborhood(Graphsrb::Vertex.new(1))
     expect(vertices.size).to be 1
     expect(vertices.include? Graphsrb::Vertex.new(2)).to be true
@@ -285,7 +285,7 @@ RSpec.describe Graphsrb::Graph do
     edges = graph.incident_edges(9)
     expect(edges.size).to be 0
 
-    graph.remove_edge(5,2)
+    graph.remove_edge(Graphsrb::Vertex.new(5),Graphsrb::Vertex.new(2))
     edges = graph.incident_edges(5)
     expect(edges.size).to be 0
   end
