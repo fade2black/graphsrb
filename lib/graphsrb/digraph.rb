@@ -33,25 +33,25 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
   end
 
   #Retrieves outgoing edges of a vertex
-  def outgoing_edges(id)
+  def outgoing_edges(v)
     #Convert nodes into edges
-    _outgoing_nodes(id).map{|node| _create_edge(id, node.vertex.id, weight:node.weight)}
+    _outgoing_nodes(v.id).map{|node| _create_edge(v.id, node.vertex.id, weight:node.weight)}
   end
 
   #Retrieves incoming edges of a vertex
-  def incoming_edges(id)
+  def incoming_edges(v)
     #Convert nodes into edges
-    _incoming_nodes(id).map{|node| _create_edge(node.vertex.id, id, weight:node.weight)}
+    _incoming_nodes(v.id).map{|node| _create_edge(node.vertex.id, v.id, weight:node.weight)}
   end
 
   #Returns +out-degree+ of a vertex
-  def outdegree(id)
-    _outgoing_nodes(id).size
+  def outdegree(v)
+    _outgoing_nodes(v.id).size
   end
 
   #Returns +in-degree+ of a vertex
-  def indegree(id)
-    _incoming_nodes(id).size
+  def indegree(v)
+    _incoming_nodes(v.id).size
   end
 
   private

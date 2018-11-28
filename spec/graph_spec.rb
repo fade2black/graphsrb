@@ -44,12 +44,12 @@ RSpec.describe Graphsrb::Graph do
 
   it "returns degree of a vertex" do
     graph = described_class.new(vertices: [9], edges:[[2,1], [2,3], [2,5], [5,3]])
-    expect(graph.degree(3)).to eq(2)
-    expect(graph.degree(1)).to eq(1)
-    expect(graph.degree(2)).to eq(3)
-    expect(graph.degree(5)).to eq(2)
-    expect(graph.degree(9)).to eq(0)
-    expect(graph.degree(6)).to eq(0)
+    expect(graph.degree(Graphsrb::Vertex.new(3))).to eq(2)
+    expect(graph.degree(Graphsrb::Vertex.new(1))).to eq(1)
+    expect(graph.degree(Graphsrb::Vertex.new(2))).to eq(3)
+    expect(graph.degree(Graphsrb::Vertex.new(5))).to eq(2)
+    expect(graph.degree(Graphsrb::Vertex.new(9))).to eq(0)
+    expect(graph.degree(Graphsrb::Vertex.new(6))).to eq(0)
   end
 
   it "returns vertices" do

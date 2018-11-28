@@ -1,5 +1,6 @@
 require "graphsrb/digraph"
 require "graphsrb/diedge"
+require "graphsrb/vertex"
 
 RSpec.describe Graphsrb::Digraph do
   it "creates an empty digraph" do
@@ -185,41 +186,41 @@ RSpec.describe Graphsrb::Digraph do
 
   it "retrieves outgoing edges of a vertex" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [1,3,1], [3,5,1], [1,6,4]])
-    edges = graph.outgoing_edges(1)
+    edges = graph.outgoing_edges(Graphsrb::Vertex.new(1))
     expect(edges.size).to eq(3)
     [Graphsrb::DiEdge.new(1,2), Graphsrb::DiEdge.new(1,3),
       Graphsrb::DiEdge.new(1,6)].each do |edge|
         expect(edges.include?(edge)).to be true
       end
 
-    edges = graph.outgoing_edges(2)
+    edges = graph.outgoing_edges(Graphsrb::Vertex.new(2))
     expect(edges.size).to be 1
     expect(edges.include?(Graphsrb::DiEdge.new(2,3))).to be true
     expect(edges.include?(Graphsrb::DiEdge.new(3,1))).to be false
 
-    edges = graph.outgoing_edges(6)
+    edges = graph.outgoing_edges(Graphsrb::Vertex.new(6))
     expect(edges.size).to be 0
 
-    edges = graph.outgoing_edges(11)
+    edges = graph.outgoing_edges(Graphsrb::Vertex.new(11))
     expect(edges.size).to be 0
   end
 
   it "retrieves incoming edges of a vertex" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [1,3,1], [3,5,1], [1,6,4]])
-    edges = graph.incoming_edges(3)
+    edges = graph.incoming_edges(Graphsrb::Vertex.new(3))
     expect(edges.size).to eq(2)
     [Graphsrb::DiEdge.new(2,3), Graphsrb::DiEdge.new(1,3)].each do |edge|
       expect(edges.include?(edge)).to be true
     end
 
-    edges = graph.incoming_edges(6)
+    edges = graph.incoming_edges(Graphsrb::Vertex.new(6))
     expect(edges.size).to eq(1)
     expect(edges.include?(Graphsrb::DiEdge.new(1,6))).to be true
 
-    edges = graph.incoming_edges(1)
+    edges = graph.incoming_edges(Graphsrb::Vertex.new(1))
     expect(edges.size).to eq(0)
 
-    edges = graph.incoming_edges(11)
+    edges = graph.incoming_edges(Graphsrb::Vertex.new(11))
     expect(edges.size).to eq(0)
   end
 
@@ -245,22 +246,22 @@ RSpec.describe Graphsrb::Digraph do
 
   it "returns out-degree" do
     graph = described_class.new(vertices: [1,2,3,5], edges:[[1,2,1], [2,3,1], [2,1,1], [1,4]])
-    expect(graph.indegree(1)).to eq(1)
-    expect(graph.outdegree(1)).to eq(2)
+    expect(graph.indegree(Graphsrb::Vertex.new(1))).to eq(1)
+    expect(graph.outdegree(Graphsrb::Vertex.new(1))).to eq(2)
 
-    expect(graph.indegree(2)).to eq(1)
-    expect(graph.outdegree(2)).to eq(2)
+    expect(graph.indegree(Graphsrb::Vertex.new(2))).to eq(1)
+    expect(graph.outdegree(Graphsrb::Vertex.new(2))).to eq(2)
 
-    expect(graph.outdegree(4)).to eq(0)
-    expect(graph.indegree(4)).to eq(1)
+    expect(graph.outdegree(Graphsrb::Vertex.new(4))).to eq(0)
+    expect(graph.indegree(Graphsrb::Vertex.new(4))).to eq(1)
 
-    expect(graph.indegree(3)).to eq(1)
-    expect(graph.outdegree(3)).to eq(0)
+    expect(graph.indegree(Graphsrb::Vertex.new(3))).to eq(1)
+    expect(graph.outdegree(Graphsrb::Vertex.new(3))).to eq(0)
 
-    expect(graph.outdegree(5)).to eq(0)
-    expect(graph.indegree(5)).to eq(0)
+    expect(graph.outdegree(Graphsrb::Vertex.new(5))).to eq(0)
+    expect(graph.indegree(Graphsrb::Vertex.new(5))).to eq(0)
 
-    expect(graph.outdegree(9)).to eq(0)
-    expect(graph.indegree(9)).to eq(0)
+    expect(graph.outdegree(Graphsrb::Vertex.new(9))).to eq(0)
+    expect(graph.indegree(Graphsrb::Vertex.new(9))).to eq(0)
   end
 end

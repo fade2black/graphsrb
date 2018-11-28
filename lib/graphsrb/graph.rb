@@ -15,7 +15,7 @@ class Graphsrb::Graph < Graphsrb::BaseGraph
   end
 
   alias neighborhood adjacent_vertices
-  
+
   #Retrieves incident edges of a vertex
   def incident_edges(id)
     #Convert nodes into edges with weights
@@ -23,8 +23,8 @@ class Graphsrb::Graph < Graphsrb::BaseGraph
   end
 
   #Returns +degree+ of a vertex
-  def degree(id)
-    _incident_nodes(id).size
+  def degree(v)
+    _incident_nodes(v.id).size
   end
 
   private

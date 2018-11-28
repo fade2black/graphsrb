@@ -1,7 +1,7 @@
 require 'graphsrb'
 include Graphsrb
 
-module DFS
+module BackEdges
   def self.run(graph)
     init(graph)
     @graph.vertices.each do |v|
@@ -10,7 +10,6 @@ module DFS
     @forest
   end
 
-  private
 
   def self.init(graph)
     @graph = graph
@@ -42,14 +41,13 @@ def run_example(example_title, graph)
   puts "------- #{example_title} ------ "
   puts "The graph has #{graph.vertex_count} vertices and #{graph.edge_count} edges"
   #Compute forest edges using depth first search algorithm
-  forest = DFS.run(graph)
+  forest = BackEdges.run(graph)
   puts "Forest:"
   forest.each{|edge| puts edge}
   #Compute back edges
   bedges = graph.edges - forest
   puts "Back edges:"
   bedges.each{|edge| puts edge}
-  puts "-"*20
 end
 
 def main
