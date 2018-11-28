@@ -218,15 +218,15 @@ RSpec.describe Graphsrb::Graph do
 
   it "retrieves edge information" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,-1], [2,3,1], [2,5,1], [6,1,0.4]])
-    edge = graph.edge(1,2)
+    edge = graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(2))
     expect(edge.vertex1.id).to be 1
     expect(edge.vertex2.id).to be 2
     expect(edge.weight).to be -1
 
-    edge = graph.edge(1,5)
+    edge = graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(5))
     expect(edge).to be nil
 
-    edge = graph.edge(1,6)
+    edge = graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(6))
     expect(edge.vertex1.id).to be 1
     expect(edge.vertex2.id).to be 6
     expect(edge.weight).to be 0.4

@@ -11,7 +11,7 @@ RSpec.describe Graphsrb::Vertex do
     expect(v1.id).to be 1
   end
 
-  it "comapres two vertices" do
+  it "compares two vertices" do
     v1 = described_class.new(1)
     v2 = described_class.new(1)
     v3 = described_class.new(2)
