@@ -234,14 +234,14 @@ RSpec.describe Graphsrb::Graph do
 
   it "retrieves incident edges" do
     graph = described_class.new(vertices: [1,2,3,4], edges:[[1,2,-1], [2,3,1], [2,5,1], [6,1,0.4]])
-    edges = graph.incident_edges(1)
+    edges = graph.incident_edges(Graphsrb::Vertex.new(1))
     expect(edges.size).to be 2
 
     expect(edges.include?(Graphsrb::Edge.new(1,2, weight:-1))).to be true
     expect(edges.include?(Graphsrb::Edge.new(1,6, weight:0.4))).to be true
 
     graph.add_edge(1,3, weight:22)
-    edges = graph.incident_edges(1)
+    edges = graph.incident_edges(Graphsrb::Vertex.new(1))
     expect(edges.size).to be 3
     expect(edges.include?(Graphsrb::Edge.new(1,3))).to be true
   end
@@ -279,14 +279,14 @@ RSpec.describe Graphsrb::Graph do
 
   it "retrieves empty set (of edges)" do
     graph = described_class.new(vertices: [1,2,3,4], edges:[[1,2,-1],[2,5,1], [6,1,0.4]])
-    edges = graph.incident_edges(4)
+    edges = graph.incident_edges(Graphsrb::Vertex.new(4))
     expect(edges.size).to be 0
 
-    edges = graph.incident_edges(9)
+    edges = graph.incident_edges(Graphsrb::Vertex.new(9))
     expect(edges.size).to be 0
 
     graph.remove_edge(Graphsrb::Vertex.new(5),Graphsrb::Vertex.new(2))
-    edges = graph.incident_edges(5)
+    edges = graph.incident_edges(Graphsrb::Vertex.new(5))
     expect(edges.size).to be 0
   end
 end
