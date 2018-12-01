@@ -18,7 +18,8 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
   end
 
   #Retrieves an edge
-  def edge(id1, id2)
+  def edge(v, u)
+    id1, id2 = v.id, u.id
     if has_vertex?(id1)
       node = adj_table[id1].find(_create_node(id2))
       return _create_edge(id1, id2, weight:node.weight) if node

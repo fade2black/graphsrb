@@ -22,7 +22,21 @@ class Graphsrb::BaseGraph
     vertex_array
   end
 
-  #Returns edges
+  #Returns an edge
+  def edge(v, u)
+    id1, id2 = v.id, u.id
+    if has_vertex?(id1)
+      node = adj_table[id1].find(_create_node(id2))
+      return _create_edge(id1, id2, weight:node.weight) if node
+    end
+
+    if has_vertex?(id2)
+      node = adj_table[id2].find(_create_node(id1))
+      return _create_edge(id1, id2, weight:node.weight) if node
+    end
+  end
+
+  #Returns edges of the graph
   def edges
     edges_array = []
     vertices.each do |vertex|
@@ -108,20 +122,6 @@ class Graphsrb::BaseGraph
     node = _create_node(id)
     adj_table.each_value{|list| list.delete(node)}
     return v
-  end
-
-  #Retrieves an edge
-  def edge(v, u)
-    id1, id2 = v.id, u.id
-    if has_vertex?(id1)
-      node = adj_table[id1].find(_create_node(id2))
-      return _create_edge(id1, id2, weight:node.weight) if node
-    end
-
-    if has_vertex?(id2)
-      node = adj_table[id2].find(_create_node(id1))
-      return _create_edge(id1, id2, weight:node.weight) if node
-    end
   end
 
 

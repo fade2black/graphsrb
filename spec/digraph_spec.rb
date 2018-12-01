@@ -11,13 +11,13 @@ RSpec.describe Graphsrb::Digraph do
 
   it "has edges with initial and terminal vertices" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
-    expect(graph.edge(1,2).initial_vertex.id).to eq(1)
-    expect(graph.edge(1,2).terminal_vertex.id).to eq(2)
-    expect(graph.edge(2,1).initial_vertex.id).to eq(2)
-    expect(graph.edge(2,1).terminal_vertex.id).to eq(1)
-    expect(graph.edge(3,2)).to be nil
-    expect(graph.edge(2,3).initial_vertex.id).to eq(2)
-    expect(graph.edge(2,3).terminal_vertex.id).to eq(3)
+    expect(graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(2)).initial_vertex.id).to eq(1)
+    expect(graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(2)).terminal_vertex.id).to eq(2)
+    expect(graph.edge(Graphsrb::Vertex.new(2),Graphsrb::Vertex.new(1)).initial_vertex.id).to eq(2)
+    expect(graph.edge(Graphsrb::Vertex.new(2),Graphsrb::Vertex.new(1)).terminal_vertex.id).to eq(1)
+    expect(graph.edge(Graphsrb::Vertex.new(3),Graphsrb::Vertex.new(2))).to be nil
+    expect(graph.edge(Graphsrb::Vertex.new(2),Graphsrb::Vertex.new(3)).initial_vertex.id).to eq(2)
+    expect(graph.edge(Graphsrb::Vertex.new(2),Graphsrb::Vertex.new(3)).terminal_vertex.id).to eq(3)
   end
 
   it "creates a digraph" do
@@ -226,19 +226,19 @@ RSpec.describe Graphsrb::Digraph do
 
   it "retrieves edge information" do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,-1], [2,3,1], [2,5,1], [6,1,0.4]])
-    edge = graph.edge(1,2)
+    edge = graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(2))
     expect(edge.vertex1.id).to be 1
     expect(edge.vertex2.id).to be 2
     expect(edge.weight).to be -1
 
-    edge = graph.edge(2,1)
+    edge = graph.edge(Graphsrb::Vertex.new(2),Graphsrb::Vertex.new(1))
     expect(edge).to be nil
-    edge = graph.edge(1,5)
+    edge = graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(5))
     expect(edge).to be nil
 
-    edge = graph.edge(1,6)
+    edge = graph.edge(Graphsrb::Vertex.new(1),Graphsrb::Vertex.new(6))
     expect(edge).to be nil
-    edge = graph.edge(6,1)
+    edge = graph.edge(Graphsrb::Vertex.new(6),Graphsrb::Vertex.new(1))
     expect(edge.vertex1.id).to be 6
     expect(edge.vertex2.id).to be 1
     expect(edge.weight).to be 0.4
