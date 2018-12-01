@@ -29,7 +29,6 @@ module BackEdges
     vertices = @graph.adjacent_vertices(v)
     vertices.each do |u|
       if @dfi[u.id] == 0
-        puts "ADDING #{@graph.edge(v, u)}"
         @forest << @graph.edge(v, u)
         dfs(u)
       end

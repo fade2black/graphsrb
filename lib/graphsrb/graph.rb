@@ -5,10 +5,10 @@ class Graphsrb::Graph < Graphsrb::BaseGraph
     nodes = []
     id = vertex.id
     nodes = adj_table[id].nodes unless adj_table[id].nil?
-    vertices.each do |vertex|
-      next if vertex.id == id
-      node = adj_table[vertex.id].find(_create_node(id))
-      nodes << _create_node(vertex.id, weight:node.weight) unless node.nil?
+    vertices.each do |v|
+      next if v.id == id
+      node = adj_table[v.id].find(_create_node(id))
+      nodes << _create_node(v.id, weight:node.weight) unless node.nil?
     end
     #Convert nodes into vertices
     nodes.map{|node| _create_vertex(node.vertex.id)}
