@@ -30,6 +30,7 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.edge_count).to be 2
   end
 
+
   it "creates alias for 'vertex?' " do
     graph = described_class.new(vertices: [1,2,3], edges:[[1,2,1], [2,3,1], [2,1,1]])
     expect(graph.vertex?(1)).to be true
@@ -288,5 +289,15 @@ RSpec.describe Graphsrb::Graph do
     graph.remove_edge(Graphsrb::Vertex.new(5),Graphsrb::Vertex.new(2))
     edges = graph.incident_edges(Graphsrb::Vertex.new(5))
     expect(edges.size).to be 0
+  end
+
+  it "updates weights" do
+    graph = described_class.new(vertices: [1,2,3], edges:[[1,2,[0,1]], [2,3,[0,2]], [1,3,[0,8]]])
+    v = graph.vertices[0]
+    u = graph.vertices[1]
+    expect(graph.edge(u,v).weight).to eq([0,1])
+    graph.update_weight(u,v,[1,2])
+    expect(graph.edge(u,v).weight).to eq([1,2])
+    expect(graph.edge(v,u).weight).to eq([1,2])
   end
 end

@@ -26,6 +26,12 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
     end
   end
 
+  #Updates edge weight
+  def update_weight(v, u, w)
+    id1, id2 = v.id, u.id
+    adj_table[id1].update_weight(_create_node(id2), w) if has_vertex?(id1)
+  end
+
 
   #Remove an edge from the graph
   def remove_edge(id1, id2)

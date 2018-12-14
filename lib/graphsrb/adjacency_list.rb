@@ -16,6 +16,12 @@ class Graphsrb::AdjacencyList
     add(node)
   end
 
+  #Updates weight
+  def update_weight(node, w)
+    node = find(node)
+    node.update_weight(w) unless node.nil?
+  end
+
   def each(&block)
     @adj_list.each(&block)
   end
@@ -56,7 +62,7 @@ class Graphsrb::AdjacencyList
     adj_list.clear
   end
 
-  #Creates and returns the newly created node
+  #Creates and returns the created node
   def self.create_node(vertex_id, args={})
     Graphsrb::Node.new(vertex_id, args)
   end

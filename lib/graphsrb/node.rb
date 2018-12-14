@@ -9,6 +9,11 @@ class Graphsrb::Node
     @weight = args.fetch(:weight, 1)
   end
 
+  #Updates weight
+  def update_weight(w)
+    @weight = w
+  end
+
   #Compares two nodes. Two nodes are equal if their +vertices+ are equal.
   def ==(node)
     vertex == node.vertex
