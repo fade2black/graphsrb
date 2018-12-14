@@ -22,6 +22,12 @@ class Graphsrb::AdjacencyList
     node.update_weight(w) unless node.nil?
   end
 
+  #Increses weight by +dw+
+  def increase_weight(node, dw)
+    node = find(node)
+    node.update_weight(node.weight + dw) unless node.nil?
+  end
+
   def each(&block)
     @adj_list.each(&block)
   end

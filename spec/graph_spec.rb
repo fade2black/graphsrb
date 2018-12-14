@@ -300,4 +300,21 @@ RSpec.describe Graphsrb::Graph do
     expect(graph.edge(u,v).weight).to eq([1,2])
     expect(graph.edge(v,u).weight).to eq([1,2])
   end
+
+  it "increases weights by some value" do
+    graph = described_class.new(vertices: [1,2,3], edges:[[1,2,-2], [2,3,2], [1,3,8]])
+    v = Graphsrb::Vertex.new(1)
+    u = Graphsrb::Vertex.new(2)
+    t = Graphsrb::Vertex.new(3)
+
+    expect(graph.edge(u,v).weight).to eq(-2)
+    graph.increase_weight(u,v,2)
+    expect(graph.edge(u,v).weight).to eq(0)
+    expect(graph.edge(v,u).weight).to eq(0)
+
+    expect(graph.edge(v,t).weight).to eq(8)
+    graph.increase_weight(t,v,-2)
+    expect(graph.edge(v,t).weight).to eq(6)
+    expect(graph.edge(t,v).weight).to eq(6)
+  end
 end

@@ -274,4 +274,21 @@ RSpec.describe Graphsrb::Digraph do
     expect(graph.edge(u,v).weight).to eq([0,8])
     expect(graph.edge(v,u).weight).to eq([1,2])
   end
+
+  it "increases weights by some value" do
+    graph = described_class.new(vertices: [1,2,3], edges:[[1,2,-2], [2,1,-5], [2,3,2], [1,3,8], [3,1,8]])
+    v = Graphsrb::Vertex.new(1)
+    u = Graphsrb::Vertex.new(2)
+    t = Graphsrb::Vertex.new(3)
+
+    expect(graph.edge(v,u).weight).to eq(-2)
+    graph.increase_weight(v,u,2)
+    expect(graph.edge(v,u).weight).to eq(0)
+    expect(graph.edge(u,v).weight).to eq(-5)
+
+    expect(graph.edge(v,t).weight).to eq(8)
+    graph.increase_weight(v,t,-2)
+    expect(graph.edge(v,t).weight).to eq(6)
+    expect(graph.edge(t,v).weight).to eq(8)
+  end
 end

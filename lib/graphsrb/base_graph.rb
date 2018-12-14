@@ -43,6 +43,13 @@ class Graphsrb::BaseGraph
     adj_table[id2].update_weight(_create_node(id1), w) if has_vertex?(id2)
   end
 
+  #Increases edge weight by +dw+
+  def increase_weight(v, u, dw)
+    id1, id2 = v.id, u.id
+    adj_table[id1].increase_weight(_create_node(id2), dw) if has_vertex?(id1)
+    adj_table[id2].increase_weight(_create_node(id1), dw) if has_vertex?(id2)
+  end
+
   #Returns edges of the graph
   def edges
     edges_array = []
