@@ -27,6 +27,11 @@ class Graphsrb::Graph < Graphsrb::BaseGraph
     _incident_nodes(v.id).size
   end
 
+  #Returns maximum degree of all graph vertices
+  def max_degree
+    self.vertices.map{|v| self.degree(v)}.max
+  end
+
   private
   def _incident_nodes(id)
     nodes = []

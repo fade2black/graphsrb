@@ -3,7 +3,7 @@ require "graphsrb/edge"
 require "graphsrb/vertex"
 
 RSpec.describe Graphsrb::Graph do
-  it "creates en empty graph" do
+  it "creates an empty graph" do
     graph = described_class.new
     expect(graph.vertex_count).to be 0
     expect(graph.edge_count).to be 0
@@ -11,6 +11,15 @@ RSpec.describe Graphsrb::Graph do
 
   it "checks if edge vertices are different (disallows loops)" do
     expect{described_class.new(edges:[[1,2,1], [2,2,1]])}.to raise_error(Graphsrb::EdgeInitializationError)
+  end
+
+  it "returns the degree of the graph (Delta)" do
+    graph = described_class.new(edges:[[1,2], [1,3], [2,3], [2,4],[4,1]])
+    expect(graph.degree(Graphsrb::Vertex.new(1))).to eq(3)
+    expect(graph.max_degree).to eq(3)
+
+    graph = described_class.new(edges:[[1,2], [2,3], [3,4], [4,1]])
+    expect(graph.max_degree).to eq(2)
   end
 
   it "creates a graph" do
