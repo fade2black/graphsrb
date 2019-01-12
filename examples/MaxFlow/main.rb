@@ -64,6 +64,16 @@ def main
     [7,8,7]
   ]
   run_example("Example 6", Digraph.new(edges:edges), Vertex.new(1), Vertex.new(8))
+
+  edges = [
+    [1,2],
+    [2,9],
+    [3,2],
+    [5,2],
+    [7,2],
+    [8,1],[8,3],[8,5],[8,7]
+  ]
+  run_example("Example 7", Digraph.new(edges:edges), Vertex.new(8), Vertex.new(9))
 end
 
 main

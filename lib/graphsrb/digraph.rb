@@ -16,6 +16,7 @@ class Graphsrb::Digraph < Graphsrb::BaseGraph
   def has_edge?(id1, id2)
     has_vertex?(id1) && adj_table[id1].has_node?(_create_node(id2))
   end
+  alias edge? has_edge?
 
   #Retrieves an edge
   def edge(v, u)

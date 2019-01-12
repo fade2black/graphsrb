@@ -4,6 +4,8 @@ include Graphsrb
 module EdmondsKarp
   MAX_INT = (2**(0.size * 8 -2) -1)
 
+  # Given undirected graph, source, and target
+  # computes maximum flow value between the source and target
   def self.run(graph, s, t)
     init(graph)
     max_flow = 0
@@ -36,7 +38,9 @@ module EdmondsKarp
 
     parent[s.id] = nil
     visited[s.id] = true
-    pushed_amount = Array.new(@graph.vertex_count, MAX_INT)
+
+    max_id = @graph.vertices.map{|v| v.id}.max
+    pushed_amount = Array.new(max_id, MAX_INT)
 
     while !queue.empty?
       v = queue.shift

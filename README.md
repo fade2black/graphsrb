@@ -1,8 +1,6 @@
 # Graphsrb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/graphsrb`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Graphsrb allows to create simple directed and undirected graphs. Basic operations allows easily implement graph algorithms
 
 ## Installation
 
@@ -21,8 +19,31 @@ Or install it yourself as:
     $ gem install graphsrb
 
 ## Usage
+```
+require 'graphsrb'
+include Graphsrb
+```
+#### Creating graphs
+Each vertex of a graph must have a unique id (a positive integer). Each edge is characterized by a pair of vertices `initial_vertex` and `terminal_vertex`.      
+```
+#(undirected) complete graph on 3 vertices
+Graph.new(edges:edges)
+graph = Graph.new(edges:[[1,2],[2,3],[3,1]])
+graph.vertex_count # => 3
+graph.edge_count # => 3
+graph.edge?(1,3) # => true
+```
+```
+#directed graph on 3 vertices
+graph = Digraph.new(edges:[[1,2],[2,3],[3,1]])
+graph = Graph.new(edges:[[1,2],[2,3],[3,1]])
+graph.vertex_count # => 3
+graph.edge_count # => 3
+graph.edge?(1,3) # => false
+```
 
-TODO: Write usage instructions here
+
+
 
 ## Development
 

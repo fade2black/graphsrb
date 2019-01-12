@@ -29,11 +29,6 @@ module FundCutset
       end
       @spanning_tree.add_edge(e.initial_vertex.id, e.terminal_vertex.id)
       fcs << cut_set
-
-      # puts block1
-      # puts "*"*20
-      # puts block2
-      # puts "-"*20
     end
     return fcs
   end
@@ -53,22 +48,3 @@ module FundCutset
     end
   end
 end
-
-
-def main
-
-  # edges = [
-  #   [1,2],[1,3],[1,5],
-  #   [2,4],[2,5],
-  #   [3,4],[3,5],
-  #   [4,5]
-  # ]
-
-  edges = [[1,2],[2,3],[3,4],[4,1]]
-
-  fcs = FundCutset.run(Graph.new(edges:edges))
-  puts "\nFundamental cut set:"
-  fcs.each{|cs| puts cs; puts ''}
-end
-
-main
