@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Bayram Kuliyev"]
   spec.email         = ["bkuliyev@gmail.com"]
 
-  spec.summary       = %q{This gems allows to create simple directed and undirected graphs. Basic operations allows easily implement graph algorithms}
+  spec.summary       = %q{This gem allows to create simple directed and undirected graphs. Basic operations allows easily implement graph algorithms}
   spec.homepage      = "https://github.com/fade2black"
   spec.license       = "MIT"
 

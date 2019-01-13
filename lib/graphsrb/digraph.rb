@@ -1,7 +1,7 @@
 #Directed graph
 class Graphsrb::Digraph < Graphsrb::BaseGraph
 
-  #Retrieves adjacent vertices of a vertex
+  #Retrieves adjacent vertices of a vertex (takes only outgoing edeges)
   def adjacent_vertices(vertex)
     nodes = []
     id = vertex.id
