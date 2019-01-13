@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["bkuliyev@gmail.com"]
 
   spec.summary       = %q{This gem allows to create simple directed and undirected graphs. Basic operations allows easily implement graph algorithms}
-  spec.homepage      = "https://github.com/fade2black"
+  spec.homepage      = "https://github.com/fade2black/graphsrb"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
