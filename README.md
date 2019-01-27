@@ -317,7 +317,7 @@ module EdmondsKarp
   end
 end
 ```
-** See examples (folder) for other implementations. **
+**See examples (folder) for other implementations.**
 
 ## Development
 
